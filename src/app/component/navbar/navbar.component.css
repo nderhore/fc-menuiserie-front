@@ -1,0 +1,27 @@
+.navbar.navbar-dark .navbar-nav .nav-item .nav-link{
+  color: white;
+  font-weight: 500;
+}
+
+.navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover{
+  color: yellow;
+  font-weight: bold;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav-item {
+  display: block;
+}
+
+.nga-navbar {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 11px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 11px 10px 0 rgba(0, 0, 0, 0.12);
+  background-color: cornflowerblue;
+}
+
+
+
