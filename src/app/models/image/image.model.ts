@@ -25,4 +25,11 @@ export class Image {
   set image_data(value: string) {
     this._image_data = value;
   }
+
+  serialize(){
+    return {
+      'image_id': this.image_id,
+      'image_data' : this.image_data
+    }
+  }
 }

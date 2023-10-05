@@ -59,4 +59,13 @@ export class Menuiserie {
   set avis(value: Array<Avis>) {
     this._avis = value;
   }
+
+  serialize(){
+    return {
+      'menuiserie_id': this.menuiserie_id,
+      'nom':this.nom,
+      'horaires': this.horaires,
+      'avis' : this.avis
+    }
+  }
 }

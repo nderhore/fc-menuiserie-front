@@ -54,4 +54,13 @@ export class Service {
   set images(value: Array<Image>) {
     this._images = value;
   }
+
+  serialize(){
+    return {
+      'service_id' : this.service_id,
+      'nom': this.nom,
+      'description': this.description,
+      'images': this.images
+    }
+  }
 }
