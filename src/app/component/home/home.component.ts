@@ -8,6 +8,7 @@ import {MenuiserieService} from "../../service/menuiserie/menuiserie.service";
 })
 export class HomeComponent implements OnInit{
   public message: string = "Bonjour";
+  isLoading: boolean = true;
 
   constructor(private menuiserieService : MenuiserieService) {
 
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit{
   ngOnInit() {
     this.menuiserieService.getMenuiserie().subscribe(reponse => {
       console.log(reponse);
+      this.isLoading = false;
     })
   }
 

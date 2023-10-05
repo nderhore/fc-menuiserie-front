@@ -1,1 +1,7 @@
-<p><i [matTooltip]="message" class="fa fa-xl fa-solid fa-magnifying-glass"></i>Bonjour</p>
+<ng-container *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</ng-container>
+<ng-container *ngIf="!isLoading">
+  <p><i [matTooltip]="message" class="fa fa-xl fa-solid fa-magnifying-glass"></i>Bonjour</p>
+
+</ng-container>
