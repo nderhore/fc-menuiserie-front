@@ -1,9 +1,5 @@
 div {
-  display: flex;
-  flex-direction: row;
   position: fixed;
-  justify-content: center;
-  align-content: center;
   bottom: 0;
   left:0;
   width: 100%;
@@ -11,4 +7,15 @@ div {
   background-color: darkblue;
   color:white;
   box-shadow: 0 -2px 5px 0 rgba(0, 0, 0, 0.16), 0 -11px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.column-responsive{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.text-align{
+  justify-content: center;
+  align-content: center;
 }
