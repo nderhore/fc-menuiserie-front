@@ -1,0 +1,45 @@
+<div class="container-fluid poppin-formulaire">
+  <h1>{{getTitle()}}</h1>
+
+  <form class="formulaire" [formGroup]="horaireForm" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label>Jour</mat-label>
+      <mat-select formControlName="jour">
+        <mat-option *ngFor="let jour of jours" [value]="jour">
+          {{ jour }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Heure d'ouverture du matin</mat-label>
+      <input matInput formControlName="morningOpeningTime" type="time">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" *ngIf="!noFermetureMorning">
+      <mat-label>Heure fermeture du matin</mat-label>
+      <input matInput formControlName="morningCloseTime" type="time">
+    </mat-form-field>
+
+    <mat-checkbox
+      [checked]="noFermetureMorning"
+      (change)="changeMorningClose($event)">
+      Pas de fermeture au matin
+    </mat-checkbox>
+
+    <mat-form-field appearance="fill" *ngIf="!noFermetureMorning">
+      <mat-label>Heure d'ouverture de l'apres-midi</mat-label>
+      <input matInput formControlName="afternoonOpenTime" type="time">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Heure fermeture de l'apres midi</mat-label>
+      <input matInput formControlName="afternoonCloseTime" type="time">
+    </mat-form-field>
+
+    <div class="action">
+      <button mat-raised-button color="warn" type="submit" [disabled]="!horaireForm.valid">{{getSubmitButton()}}</button>
+      <button mat-raised-button type="reset" (click)="closePopin()">Annuler</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,14 @@
+.formulaire{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.poppin-formulaire{
+  padding: 2em;
+}
+.action{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
