@@ -16,7 +16,7 @@ export class Horaire {
     this._horaire_id = data.horaire_id ? data.horaire_id : null;
     this._heure_apres_midi = data.heure_apres_midi ? data.heure_apres_midi : null;
     this._heure_matin = data.heure_matin ? data.heure_matin : null;
-    this._jour = data.jour ? JSON.parse(data.jour).jour : null; // {'jour':'LUNDI'}
+    this._jour = data.jour ? data.jour : null; // {'jour':'LUNDI'}
   }
 
 
