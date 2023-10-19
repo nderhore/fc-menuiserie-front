@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {identity} from "rxjs";
 import {Jour} from "../../models/enum/jour.enum";
 import {PopinHoraireComponent} from "../popin/popin-horaire/popin-horaire.component";
+import {ToastService, ToastType} from "../../service/toast/toast.service";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,10 +19,11 @@ export class AdminDashboardComponent implements OnInit{
   editer: string;
   suppression: string;
   displayedColumnsHoraire: Array<string>;
-  jours = Object.keys(Jour);
+  jours  : Array<string> = ["LUNDI","MARDI","MERCREDI","JEUDI","VENDREDI","SAMEDI","DIMANCHE","FERIE"]
 
   constructor(public horaireService : HoraireService,
-              public dialog:MatDialog) {
+              public dialog:MatDialog,
+              public toastService : ToastService) {
     this.horaires = [];
     this.editer = "modifier";
     this.suppression = "supprimer";
@@ -29,6 +31,7 @@ export class AdminDashboardComponent implements OnInit{
   }
 
   ngOnInit() {
+
     this.horaireService.getAllHoraires().subscribe(lesHoraires => {
       lesHoraires.forEach((unHoraire : Horaire) => {
         this.horaires.push(new Horaire(unHoraire));
@@ -49,7 +52,19 @@ export class AdminDashboardComponent implements OnInit{
   }
 
   editHoraire(element : Horaire) {
-
+    const dialogRef = this.dialog.open(PopinHoraireComponent,{
+      data : {
+        mode: Mode.EDIT,
+        horaire: element
+      }
+    });
+    dialogRef.componentInstance.onUpdate.subscribe(value => {
+      this.horaireService.updateHoraire(value.horaire_id,value).subscribe(response => {
+        this.horaires = this.horaires
+          .filter(horaire => horaire.horaire_id != value.horaire_id);
+        this.horaires.push(value);
+      });
+    });
   }
 
   createHoraire() {
@@ -63,10 +78,12 @@ export class AdminDashboardComponent implements OnInit{
       dialogRef.componentInstance.onSubmit.subscribe(event => {
         this.horaireService.createHoraire(event).subscribe(response => {
           this.horaires = [];
+          this.toastService.showToaster(ToastType.SUCCESS,"Ajout de l'horaire effectué !")
           this.horaireService.getAllHoraires().subscribe(reponse=> {
             reponse.forEach(unHoraire => {
               this.horaires.push(new Horaire(unHoraire));
             });
+
           });
         });
       });
@@ -75,7 +92,7 @@ export class AdminDashboardComponent implements OnInit{
 
   getJourAvailable() : Array<string> {
     let jours : Array<string> = [];
-    this.jours.forEach(jour => {
+    this.jours.forEach(jour  => {
       let isAvailable = true;
       this.horaires.forEach(horaire => {
         if(Jour[horaire.jour] == jour){
